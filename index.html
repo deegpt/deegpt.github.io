@@ -92,8 +92,145 @@
       padding-top: 0;
     }
 
+    /* ── TOP PROJECTS STRIP ── */
+    .top-projects-strip {
+      padding: 2.5rem 2rem 0 2rem;
+      position: relative;
+      z-index: 3;
+    }
+
+    .top-projects-strip .strip-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      background: var(--accent-soft);
+      color: var(--accent);
+      padding: .35rem .8rem;
+      border-radius: 999px;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .top-projects-strip .strip-kicker::before {
+      content: "★";
+      font-size: .7rem;
+    }
+
+    .top-projects-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.1rem;
+    }
+
+    .top-project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(23,32,51,.07);
+      overflow: hidden;
+      text-decoration: none;
+      color: var(--ink);
+      display: flex;
+      flex-direction: column;
+      transition: transform .22s ease, box-shadow .22s ease;
+    }
+
+    .top-project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 18px 52px rgba(47,111,237,.14);
+      text-decoration: none;
+      color: var(--ink);
+    }
+
+    .top-project-card .tpc-thumb {
+      width: 100%;
+      height: 130px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .top-project-card .tpc-thumb::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(19,27,43,.08) 0%, rgba(19,27,43,.52) 100%);
+      transition: background .3s ease;
+    }
+
+    .top-project-card:hover .tpc-thumb::after {
+      background: linear-gradient(180deg, rgba(47,111,237,.15) 0%, rgba(19,27,43,.65) 100%);
+    }
+
+    .top-project-card .tpc-badge {
+      position: absolute;
+      bottom: .7rem;
+      left: .8rem;
+      z-index: 2;
+      background: rgba(255,255,255,.92);
+      color: var(--ink);
+      padding: .3rem .65rem;
+      border-radius: 999px;
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      transition: background .3s ease, color .3s ease;
+    }
+
+    .top-project-card:hover .tpc-badge {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .top-project-card .tpc-body {
+      padding: .9rem 1rem 1rem 1rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: .35rem;
+    }
+
+    .top-project-card .tpc-title {
+      font-size: .88rem;
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--ink);
+      margin: 0;
+    }
+
+    .top-project-card .tpc-desc {
+      font-size: .76rem;
+      color: var(--muted);
+      line-height: 1.45;
+      margin: 0;
+      flex: 1;
+    }
+
+    .top-project-card .tpc-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .35rem;
+      margin-top: .4rem;
+    }
+
+    .top-project-card .tpc-tags span {
+      background: #f1f4fb;
+      color: #42506d;
+      border-radius: 999px;
+      padding: .25rem .55rem;
+      font-size: .68rem;
+      font-weight: 600;
+      letter-spacing: .02em;
+    }
+
+    /* ── HERO SUMMARY (Profile + Highlights) ── */
     .hero-summary {
-      margin-top: -4rem;
+      margin-top: 1.5rem;
       padding: 0 2rem 2rem 2rem;
       position: relative;
       z-index: 2;
@@ -170,7 +307,6 @@
       width: 100%;
     }
 
-    /* 2-column side-by-side grid */
     .posts {
       display: grid !important;
       grid-template-columns: repeat(2, 1fr) !important;
@@ -344,7 +480,10 @@
         grid-template-columns: 1fr;
       }
       .hero-summary {
-        margin-top: -2rem;
+        margin-top: 1rem;
+      }
+      .top-projects-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
       .posts {
         grid-template-columns: repeat(2, 1fr) !important;
@@ -356,10 +495,15 @@
       #intro {
         padding-top: 5rem;
       }
+      .top-projects-strip,
       .hero-summary,
       .project-section-title {
         padding-left: 1rem;
         padding-right: 1rem;
+      }
+      .top-projects-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: .75rem;
       }
       .hero-panel,
       .posts article header,
@@ -375,6 +519,12 @@
         grid-template-columns: 1fr !important;
       }
     }
+
+    @media screen and (max-width: 480px) {
+      .top-projects-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body class="is-preload">
@@ -388,6 +538,9 @@
         <span>Python</span>
         <span>Power BI</span>
         <span>Tableau</span>
+        <span>Funnel &amp; Cohort Analytics</span>
+        <span>A/B Testing</span>
+        <span>Statistical Analysis</span>
         <span>Operational Analytics</span>
         <span>Business Intelligence</span>
       </div>
@@ -410,19 +563,85 @@
       </ul>
     </nav>
 
+    <!-- ── TOP PROJECTS STRIP ── -->
+    <div class="top-projects-strip">
+      <div class="strip-kicker">Top Projects</div>
+      <div class="top-projects-grid">
+
+        <!-- Card 1: Operational SLA -->
+        <a class="top-project-card" href="https://github.com/deegpt/Operational-escalation-SLA-CSAT-Analysis" target="_blank" rel="noopener noreferrer">
+          <div class="tpc-thumb" style="background-image:url('https://pplx-res.cloudinary.com/image/upload/pplx_search_images/8103f03f6e115d8ee469e6c7735c5574cd464511.jpg');">
+            <span class="tpc-badge">SQL · Power BI</span>
+          </div>
+          <div class="tpc-body">
+            <p class="tpc-title">Operational Escalation, SLA &amp; CSAT Analysis</p>
+            <p class="tpc-desc">1,200+ FinTech support tickets — escalation drivers, SLA breach patterns &amp; CSAT degradation signals.</p>
+            <div class="tpc-tags">
+              <span>SQL</span><span>Python</span><span>Power BI</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Card 2: Funnel & Cohort -->
+        <a class="top-project-card" href="https://public.tableau.com/app/profile/deepak.gupta2030/viz/FunnelModelCohortAnalysis/Dashboard2#1" target="_blank" rel="noopener noreferrer">
+          <div class="tpc-thumb" style="background-image:url('images/funnel-model-and-cohort-analysis.png');">
+            <span class="tpc-badge">Tableau · SQL</span>
+          </div>
+          <div class="tpc-body">
+            <p class="tpc-title">Funnel &amp; Cohort Retention Analysis</p>
+            <p class="tpc-desc">1.7M+ events — onboarding funnel, weekly cohort retention &amp; KYC drop-off in an interactive Tableau dashboard.</p>
+            <div class="tpc-tags">
+              <span>Tableau</span><span>Cohort</span><span>Funnel</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Card 3: Vendor Performance -->
+        <a class="top-project-card" href="https://github.com/deegpt/vendor-performance-Data-Analysis-project" target="_blank" rel="noopener noreferrer">
+          <div class="tpc-thumb" style="background-image:url('https://pplx-res.cloudinary.com/image/upload/pplx_search_images/4b562ee84ad5216425210a5a5feb345a7d219769.jpg');">
+            <span class="tpc-badge">Python · SQLite</span>
+          </div>
+          <div class="tpc-body">
+            <p class="tpc-title">Vendor Performance Data Analysis</p>
+            <p class="tpc-desc">Hypothesis testing, t-tests &amp; correlation analysis delivering 6 prioritised business recommendations.</p>
+            <div class="tpc-tags">
+              <span>Python</span><span>Statistics</span><span>EDA</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Card 4: A/B Testing -->
+        <a class="top-project-card" href="https://github.com/deegpt/ab-testing-simulation" target="_blank" rel="noopener noreferrer">
+          <div class="tpc-thumb" style="background-image:url('https://pplx-res.cloudinary.com/image/upload/pplx_search_images/d1db41a0cb43be08cfb5158eb08c1194dccca943.jpg');">
+            <span class="tpc-badge">A/B Testing · Stats</span>
+          </div>
+          <div class="tpc-body">
+            <p class="tpc-title">A/B Testing Simulation</p>
+            <p class="tpc-desc">End-to-end experiment design — power analysis, MDE, guardrail metrics &amp; business decision framing.</p>
+            <div class="tpc-tags">
+              <span>Python</span><span>Statistics</span><span>Experiment Design</span>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- ── PROFILE + HIGHLIGHTS ── -->
     <div class="hero-summary">
       <section class="hero-panel">
         <div>
           <span class="section-kicker">Profile</span>
           <h2>Analytics projects built around real business questions</h2>
-          <p>This homepage refresh focuses on recent GitHub work, clearer storytelling and a cleaner presentation for recruiters, hiring managers and collaborators.</p>
+          <p>6+ years in FinTech support operations — now building end-to-end analytics solutions in SQL, Python, Power BI and Tableau, with the domain context that pure analysts don't have.</p>
         </div>
         <div>
           <span class="section-kicker">Highlights</span>
           <ul>
-            <li>Recent analytics repositories prioritized over older practice work.</li>
-            <li>Project descriptions rewritten to emphasize tools, business context and outcomes.</li>
-            <li>Every card links directly to the matching GitHub repository.</li>
+            <li>SLA &amp; escalation analytics across 1,200+ FinTech support tickets.</li>
+            <li>Interactive Tableau dashboard built on 1.7M+ user events.</li>
+            <li>Statistical hypothesis testing with business recommendations.</li>
+            <li>Full experiment design — power analysis, guardrails &amp; A/B framing.</li>
           </ul>
         </div>
       </section>
@@ -458,7 +677,6 @@
 
       <section class="posts">
 
-        <!-- NEW: Funnel & Cohort Analysis — ranked #1 in grid -->
         <article>
           <header>
             <h2><a href="https://github.com/deegpt/revolut-funnel-cohort-analysis" target="_blank" rel="noopener noreferrer">Funnel &amp; Cohort Analysis | 2024</a></h2>
@@ -499,6 +717,27 @@
           <p>An end-to-end analytics project using Python and SQL to explore vendor data, clean records, answer business questions and interpret findings in a structured analysis workflow.</p>
           <ul class="actions special">
             <li><a href="https://github.com/deegpt/vendor-performance-Data-Analysis-project" target="_blank" rel="noopener noreferrer" class="button">View Project</a></li>
+          </ul>
+        </article>
+
+        <article>
+          <header>
+            <h2><a href="https://github.com/deegpt/ab-testing-simulation" target="_blank" rel="noopener noreferrer">A/B Testing Simulation</a></h2>
+          </header>
+          <a href="https://github.com/deegpt/ab-testing-simulation" target="_blank" rel="noopener noreferrer" class="image fit thumb" style="position:relative;overflow:hidden;display:block;min-height:200px;">
+            <div class="thumb-bg" style="background-image:url('https://pplx-res.cloudinary.com/image/upload/pplx_search_images/d1db41a0cb43be08cfb5158eb08c1194dccca943.jpg');"></div>
+            <div class="thumb-overlay"><span>View Project</span></div>
+            <span class="thumb-label">Python + Stats</span>
+          </a>
+          <div class="project-meta">
+            <span>A/B Testing</span>
+            <span>Power Analysis</span>
+            <span>Experiment Design</span>
+            <span>Guardrail Metrics</span>
+          </div>
+          <p>Full end-to-end A/B testing simulation covering experiment design, sample size and power calculations, guardrail metrics, and business decision framing — including a near-miss narrative at p = 0.0642.</p>
+          <ul class="actions special">
+            <li><a href="https://github.com/deegpt/ab-testing-simulation" target="_blank" rel="noopener noreferrer" class="button">View Project</a></li>
           </ul>
         </article>
 
